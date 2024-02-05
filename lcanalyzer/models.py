@@ -14,24 +14,24 @@ from astropy.timeseries import LombScargle
 def load_dataset(filename):
     """Load a table from CSV file.
     
-    :param filename: The name of the .csv file to load
+    :param filename: The name of the .csv file to load.
     :returns: pd.DataFrame with the data from the file.
     """
     return pd.read_csv(filename)
 
 
 def mean_mag(data,mag_col):
-    """Calculate the mean magnitude of a lightcurve"""
+    """Calculate the mean magnitude of a lightcurve."""
     return data[mag_col].mean()
 
 
 def max_mag(data,mag_col):
-    """Calculate the max magnitude of a lightcurve"""
+    """Calculate the max magnitude of a lightcurve."""
     return data[mag_col].max()
 
 
 def min_mag(data,mag_col):
-    """Calculate the min magnitude of a lightcurve
+    """Calculate the min magnitude of a lightcurve.
     :param data: pd.DataFrame with observed magnitudes for a single source.
     :param mag_col: a string with the name of the column for calculating the min value.
     :returns: The min value of the column.
