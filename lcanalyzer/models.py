@@ -9,7 +9,6 @@ in a single or different bands.
 """
 
 import pandas as pd
-import numpy as np
 from astropy.timeseries import LombScargle
 
 def load_dataset(filename):
@@ -38,7 +37,8 @@ def max_mag(data,mag_col):
     :param mag_col: a string with the name of the column for calculating the min value.
     :returns: The max value of the column
     """
-    return data[mag_col].max()
+    max_data = data[mag_col].max()
+    return max_data
 
 
 def min_mag(data,mag_col):
@@ -48,7 +48,8 @@ def min_mag(data,mag_col):
     :param mag_col: a string with the name of the column for calculating the min value.
     :returns: The min value of the column.
     """
-    return data[mag_col].min()
+    min_data = data[mag_col].min()
+    return min_data
 
 def calc_stat(lc, bands, mag_col):
     """
@@ -94,9 +95,9 @@ def normalize_lc(df, mag_col):
     """
     if any(df[mag_col].abs() > 90):
         raise ValueError(mag_col+' contains values with abs() larger than 90!')
-        
-    min = min_mag(df,mag_col)
-    max = max_mag((df-min),mag_col)
-    lc = (df[mag_col]-min)/max
+
+    min_data = min_mag(df,mag_col)
+    max_data = max_mag((df-min_data),mag_col)
+    lc = (df[mag_col]-min_data)/max_data
     lc = lc.fillna(0)
     return lc
