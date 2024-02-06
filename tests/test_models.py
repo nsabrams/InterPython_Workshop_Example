@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import pytest
 
 def test_max_mag_integers():
     # Test that max_mag function works for integers
@@ -70,4 +71,12 @@ def test_calc_stat_integers():
     test_output = {"df1_max": 8, "df2_max": 6, "df3_max": 9}
     
     assert calc_stat(test_input, ["df1", "df2", "df3"], test_input_colname) == test_output
+
+def test_max_mag_strings():
+    # Test for TypeError when passing a string
+    from lcanalyzer.models import max_mag
+
+    test_input_colname = "b"
+    with pytest.raises(TypeError):
+        error_expected = max_mag('string', test_input_colname)
     
