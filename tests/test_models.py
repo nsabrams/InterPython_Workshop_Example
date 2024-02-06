@@ -3,6 +3,8 @@
 import pandas as pd
 import numpy as np
 import pytest
+import pandas.testing as pdt
+
 
 @pytest.mark.parametrize(
     "test_df, test_colname, expected",
@@ -87,6 +89,27 @@ def test_calc_stat_integers():
     test_output = {"df1_max": 8, "df2_max": 6, "df3_max": 9}
     
     assert calc_stat(test_input, ["df1", "df2", "df3"], test_input_colname) == test_output
+
+def test_calc_stats_integers():
+    # Test that calc_stats function works for integers
+    from lcanalyzer.models import calc_stats
+    
+    size = (4,3)
+    np.random.seed(0)
+    df1 = pd.DataFrame(data=np.random.randint(0, 10, size), columns=list("abc"))
+    np.random.seed(1)
+    df2 = pd.DataFrame(data=np.random.randint(0, 10, size), columns=list("abc"))
+    np.random.seed(2)
+    df3 = pd.DataFrame(data=np.random.randint(0, 10, size), columns=list("abc"))
+
+    test_input = {"df1": df1, "df2": df2, "df3": df3}
+    test_output = pd.DataFrame(data=[[7,8,8],[4.75,4.25,5.25],[0,0,1]],columns=['df1','df2','df3'],index=['max','mean','min'])
+    test_input_colname = "b"
+    pdt.assert_frame_equal(calc_stats(test_input, ["df1", "df2", "df3"], test_input_colname),
+                       test_output,
+                       check_exact=False,
+                       atol=0.01)
+                       
 
 def test_max_mag_strings():
     # Test for TypeError when passing a string

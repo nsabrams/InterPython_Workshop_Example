@@ -65,3 +65,21 @@ def calc_stat(lc, bands, mag_col):
     for b in bands:
         stat[b + "_max"] = max_mag(lc[b], mag_col)
     return stat
+
+def calc_stats(lc, bands, mag_col):
+    """
+    Calculate max, mean and min values for all bands of a light curve
+
+    :param lc: Dictionary of pd.DataFrame with observed magnitudes for a single source.
+    :param bands: string of band names.
+    :param mag_col: a string with the name of the column for calculating the min value.
+    :returns: A pd.Dataframe with the max, mean, and min values of the column for each dataset.
+    """
+    stats = {}
+    for b in bands:
+        stat = {}
+        stat["max"] = max_mag(lc[b], mag_col)
+        stat["mean"] = mean_mag(lc[b], mag_col)
+        stat["min"] = min_mag(lc[b], mag_col)
+        stats[b] = stat
+    return pd.DataFrame.from_records(stats)
