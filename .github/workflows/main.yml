@@ -12,6 +12,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11"]
+	include:
+	 - os: macos-latest
+	   python-version: "3.11"
+	   pylint : "True"
 
     runs-on: ${{ matrix.os }}
 
@@ -38,6 +42,7 @@ jobs:
         python -m pytest --cov=lcanalyzer.models tests/test_models.py
 
     - name: Check .py style with Pylint
+      if: ${{ matrix.pylint }}
       run: |
         python3 -m pylint --reports=y lcanalyzer
 
