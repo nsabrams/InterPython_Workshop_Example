@@ -2,7 +2,17 @@ import pandas as pd
 import numpy as np
 
 class Lightcurve:
-    """A Lightcurve class"""
+    """A Lightcurve class
+       Args:
+       obj_id: Star ID
+       mjds: a list or array of the time of observations in 
+             modified Julian Dates.
+       mags: a list or array of the brightness measurements 
+             in magnitude.
+       mag_errs(optional): a list or array of the uncertainty of the 
+             brightness measurements in magnitude.
+             
+    """
     def __init__(self, obj_id, mjds, mags, mag_errs = None):
         self.obj_id = obj_id
         self.lc = {
