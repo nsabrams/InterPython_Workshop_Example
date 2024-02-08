@@ -15,7 +15,7 @@ class Survey:
         self.band_col = band_col
         self.time_col = time_col
         self.mag_col = mag_col
-        self.data = self.load_table(filename, self.clean_table)
+        self.data = self.load_table(filename)
         self.unique_objects = self.data[self.id_col].unique()
 
     def load_table(self, filename, clean_nans = True):
@@ -38,7 +38,7 @@ class Survey:
         
         return df
     
-    def clean_table(self,df,nan_val='nan'):
+    def clean_nans(self,df,nan_val='nan'):
         if nan_val == 'nan':
             filt_nan = ~((df[self.mag_col] == nan_val) | (
                 df[self.mag_col].isnull())

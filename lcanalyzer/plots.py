@@ -15,5 +15,6 @@ def plot_lightcurve(mjds, mags, x_label='mjd (days)', y_label='mag', color='blue
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     fig.tight_layout()
+    plt.gca().invert_yaxis()
     plt.show()
 
