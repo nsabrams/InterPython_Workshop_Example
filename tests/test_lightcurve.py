@@ -3,6 +3,7 @@
 import numpy as np
 
 def test_add_observations():
+    #Test if observations are added when using Lightcurve().add_observations()
     from lcanalyzer import lightcurve
     np.random.seed(999)
     test_mjds = np.arange(50000,55000,1)
